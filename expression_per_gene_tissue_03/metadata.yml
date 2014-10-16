@@ -1,0 +1,5 @@
+name: expression_per_gene_tissue_03
+version: 0.1
+description: JCVI RTPCR Webservice Generic
+type: generic
+main_module: expression_per_gene_tissue_03/main.py
