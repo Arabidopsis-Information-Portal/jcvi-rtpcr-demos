@@ -1,0 +1,6 @@
+name: expression_per_gene_tissue_04
+version: 0.1
+description: JCVI RTPCR Webservice Pass-Through
+type: passthrough
+# Example - http://www.jcvi.org/cgi-bin/arabidopsis/qpcr/ExpressionPerGenePerTissue?gene=AT1G33930.1&format=json&Submit=Search
+url: http://www.jcvi.org/cgi-bin/arabidopsis/qpcr/ExpressionPerGenePerTissue
