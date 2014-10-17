@@ -1,0 +1,6 @@
+name: expression_per_gene_tissue_01
+version: 0.1
+description: JCVI RTPCR Webservice returns AIP schema by scraping server HTML response
+type: query
+main_module: expression_per_gene_tissue_01/main.py
+url: http://www.jcvi.org/cgi-bin/arabidopsis/qpcr/ExpressionPerGenePerTissue

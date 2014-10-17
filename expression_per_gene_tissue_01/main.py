@@ -1,12 +1,13 @@
 import json
 import requests
 import re
+from bs4 import BeautifulSoup
 
-# This illustrates an example of transforming JSON from the current format served
+# This illustrates an example of transforming JSON from the HTML served
 # by JCVI servers to a prototype AIP-compliant data frame. It's implemented as a 
-# query type but if we sacrificed enforcement and validation of params it could
-# be a map_filter type as well. 
-     
+# query type. We use the souper-handy BeautifulSoup module
+# http://www.crummy.com/software/BeautifulSoup/bs4/doc/
+
 def search(arg):
 
 # arg contains a dict with one or key:values
@@ -45,28 +46,44 @@ def search(arg):
         material = None
         
 	# We can also use the params function of requests but I was lazy here
-    url = 'http://www.jcvi.org/cgi-bin/arabidopsis/qpcr/ExpressionPerGenePerTissue?Submit=Search&format=json&gene=' + trans
+    url = 'http://www.jcvi.org/cgi-bin/arabidopsis/qpcr/ExpressionPerGenePerTissue?Submit=Search&format=html&gene=' + trans
     if not material is None:
         url = url + '&tissue=' + material
     
     r = requests.get(url)
-    for result in r.json()['expression']:
+    # This is where if differs from just transforming the data. 
+    # We must implement a screen scraper!
+    soup = BeautifulSoup(r.text)
+    tables = soup.findChildren('table')
+    # This will get the first (and only) table from the result page
+    data_table = tables[0]
+    # This extracts all its rows into a list, 
+    # then deletes the header row because we don't need to process it
+    rows = data_table.findChildren(['tr'])
+    rows.pop(0)
+    # Iterate over the rows, slotting their cells to a formatted JSON record
+    for row in rows:
+        # The HTML on this page is idiomatic. All cells are th instead of td
+        cells = row.findChildren('th')
+        # Stuff cells into a temporary dict
+        # The strip() is needed because strings coming from bs4 have wierd whitespace padding
+        # that needs to be removed
         record = { 'class':'transcript_property',
                    'transcript': trans,
                    'source_text_description': 'RT-PCR',
                    'expression_record': [ 
-                        {'material_text_description': valid_materials[result['elem_tissue'].lower()],
-                        'cycle_time':result['elem_cycle_time'],
-                        'cycle_time_stdev':result['elem_cycle_time2'],
-                        'absolute_concentration':result['elem_conc'],
-                        'absolute_concentration_stdev':result['elem_conc2'],
-                        'ratio_to_invariants':result['elem_ratio'],
-                        'ratio_to_invariants_stdev':result['elem_ratio2']} 
+                        {'material_text_description': valid_materials.get( cells[1].string.strip().lower() ),
+                        'cycle_time':cells[2].string.strip(),
+                        'cycle_time_stdev':cells[3].string.strip(),
+                        'absolute_concentration':cells[6].string.strip(),
+                        'absolute_concentration_stdev':cells[7].string.strip(),
+                        'ratio_to_invariants':cells[4].string.strip(),
+                        'ratio_to_invariants_stdev':cells[5].string.strip() }
                    ]
         }
         print json.dumps(record, indent=2)
         print '---'
-
+        
 def list(arg):
 	# We don't have a valid operation for the /list endpoint. At present, just return a nasty
 	# looking stack trace from within ADAMA. At least the client will know they did something bad
