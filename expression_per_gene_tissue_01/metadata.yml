@@ -3,7 +3,7 @@ description: "JCVI RTPCR Webservice returns AIP schema by scraping server HTML r
 main_module: expression_per_gene_tissue_01/main.py
 name: expression_per_gene_tissue_01
 requirements: 
-  - bs4
+  - beautifulsoup4
 type: query
 url: "http://www.jcvi.org/cgi-bin/arabidopsis/qpcr/ExpressionPerGenePerTissue"
 version: 0.1
