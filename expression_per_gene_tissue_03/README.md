@@ -8,8 +8,8 @@ Action: Test locally (assuming you've checked out this repo)
 cd expression_per_gene_tissue_03
 python
 >> import main
->> main.search({'transcript':'AT1G33930.1', 'format':'json'})
-('application/json; charset=ISO-8859-1', '{"expression":[{"elem_tissue":"FLOWER","elem_conc":"0.00030","elem_ratio":"0.062","elem_conc2":"0.00017","elem_ratio2":"0.0021","elem_cycle_time":"25.82","elem_target_id":"AT1G33930.1","elem_cycle_time2":"0.081"},{"elem_tissue":"IAA","elem_conc":"0.14","elem_ratio":"0.036","elem_conc2":"0.092","elem_ratio2":"0.0012","elem_cycle_time":"25.35","elem_target_id":"AT1G33930.1","elem_cycle_time2":"0.34"},{"elem_tissue":"LEAF","elem_conc":"0.057","elem_ratio":"0.040","elem_conc2":"0.035","elem_ratio2":"0.0015","elem_cycle_time":"26.81","elem_target_id":"AT1G33930.1","elem_cycle_time2":"0.44"},{"elem_tissue":"NACL","elem_conc":"9.19e-05","elem_ratio":"0.047","elem_conc2":"4.25e-05","elem_ratio2":"0.0015","elem_cycle_time":"25.37","elem_target_id":"AT1G33930.1","elem_cycle_time2":"0.63"},{"elem_tissue":"ROOT","elem_conc":"0.00089","elem_ratio":"0.00039","elem_conc2":"0.00031","elem_ratio2":"6.29e-06","elem_cycle_time":"33.43","elem_target_id":"AT1G33930.1","elem_cycle_time2":"0.59"},{"elem_tissue":"SALICYLIC","elem_conc":"7.32e-05","elem_ratio":"0.012","elem_conc2":"9.86e-05","elem_ratio2":"0.00085","elem_cycle_time":"26.62","elem_target_id":"AT1G33930.1","elem_cycle_time2":"1.23"},{"elem_tissue":"YOUNG","elem_conc":"1.80e-05","elem_ratio":"0.0048","elem_conc2":"1.37e-05","elem_ratio2":"0.00015","elem_cycle_time":"29.41","elem_target_id":"AT1G33930.1","elem_cycle_time2":"0.33"}]}\n')
+>> main.search({'transcript':'AT1G33930.1', 'format':'json', 'material':'Young'})
+('application/json; charset=ISO-8859-1', '{"expression":[{"elem_tissue":"YOUNG","elem_conc":"1.80e-05","elem_ratio":"0.0048","elem_conc2":"1.37e-05","elem_ratio2":"0.00015","elem_cycle_time":"29.41","elem_target_id":"AT1G33930.1","elem_cycle_time2":"0.33"}]}\n')
 ```
 
 Action: Enroll via Gitrepo

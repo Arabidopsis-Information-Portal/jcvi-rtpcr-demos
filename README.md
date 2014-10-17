@@ -5,6 +5,10 @@ Objective: Creating web services from JCVI's qPCR and promoter-reported work, wh
 
 Service 1: ExpressionPerGenePerTissue
 -------------------------------------
+* expression_per_gene_tissue_01: Query; Transforms parameters; Returns AIP schema by scraping server HTML response
+* expression_per_gene_tissue_02: Query; Transforms parameters; Returns AIP schema by transforming server JSON response
+* expression_per_gene_tissue_03: Generic; Transforms parameters; Returns service native JSON or HTML
+* expression_per_gene_tissue_04: Passthrough; Uses service native parameters; Returns service native response
 
 Service 2-inf: TBD
 ------------------
@@ -87,4 +91,24 @@ Example Source Data
      "elem_cycle_time":"29.41",
      "elem_target_id":"AT1G33930.1",
      "elem_cycle_time2":"0.33"}]}
+```
+
+Example AIP-schema response
+---------------------------
+```
+{"result":[
+    {"expression_record":[
+        {"cycle_time":"29.41",
+         "absolute_concentration_stdev":"1.37e-05",
+         "ratio_to_invariants_stdev":"0.00015",
+         "cycle_time_stdev":"0.33",
+         "material_text_description":"Young Siliques",
+         "ratio_to_invariants":"0.0048",
+         "absolute_concentration":"1.80e-05"}],
+     "transcript":"AT1G33930.1",
+     "class":"transcript_property",
+     "source_text_description":"RT-PCR"}],
+ "metadata":
+    {"time_in_main":0.5054709911346436},
+ "status":"success"}
 ```

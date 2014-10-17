@@ -38,9 +38,27 @@ def search(arg):
     fmt = fmt.lower()
     if not fmt in ['html', 'json']:
         return fail('Supported formats are HTML and JSON')
+        
+    # If material was passed make sure its in the (hard-coded) approved list
+    # We also encode the written names of the samples here for inclusion into the JSON response
+    # For cross-compatibility, we could map these treatments/tissues to one or more
+    # third part ontologies and return those
+    valid_materials = {'flower':'Flower Buds', 'iaa':'IAA', 'leaf':'Leaf', 'root':'Root', 'salicylic':'Salicylic Acid', 'nacl':'NaCl', 'young':'Young Siliques', 't87':'T87 Cell Culture'}
+    
+    if ('material' in arg):
+        material = arg['material']
+        material = material.lower()
+        if not material in valid_materials.keys():
+            return
+    else:
+        material = None
     
 	# We can also use the params function of requests but I was lazy here
     url = 'http://www.jcvi.org/cgi-bin/arabidopsis/qpcr/ExpressionPerGenePerTissue?Submit=Search&format=' + fmt + '&gene=' + trans
+    
+    if not material is None:
+        url = url + '&tissue=' + material
+    
     r = requests.get(url)
     
 	# Here's a new bit of error handling, unique to the generic type
