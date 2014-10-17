@@ -1,7 +1,7 @@
 Expression_per_gene_tissue_04: Pass-through
 ===========================================
 
-An example of how to configure a straight pass-through API under ADAMA. At present, one passes a GET request (other HTTP verbs will be supported in the future) to the $API/$NS/$SERVICE_$VERSION/search endpoint. In a couple days, this will become the /access endpoint.
+An example of how to configure simple straight pass-through API under ADAMA. At present, one passes a GET request (other HTTP verbs will be supported in the future) to the $API/$NS/$SERVICE_$VERSION/search endpoint. In a couple days, this will become the /access endpoint.
 
 Action: Enroll via Gitrepo containing just the metadata.yml file
 ```
