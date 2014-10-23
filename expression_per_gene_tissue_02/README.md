@@ -5,16 +5,40 @@ An example of how to configure a simple query API under ADAMA. One passes a GET 
 
 Action: Enroll via Gitrepo
 ```
-curl -sk -L -X POST $API/$NS/services -F "git_repository=https://github.com/mwvaughn/jcvi-rtpcr-demos.git" -F "metadata=expression_per_gene_tissue_02" -H "Authorization: Bearer $TOKEN"
+curl -sk -L -X POST $API/$NS/services -F \
+    "git_repository=https://github.com/Arabidopsis-Information-Portal/jcvi-rtpcr-demos.git" \
+    -F "metadata=expression_per_gene_tissue_02" \
+    -H "Authorization: Bearer $TOKEN"
 ```
 
 Action: Test service
 ```
-curl -sk -L -X GET "https://adama-dev.tacc.utexas.edu/community/v0.3/vaughn-dev/expression_per_gene_tissue_02_v0.1/search?transcript=AT1G33930.1&material=Young"
+curl -sk -L -X GET "$API/$NS/expression_per_gene_tissue_02_v0.2/search?transcript=AT1G33930.1&material=Young" \
+    -H "Authorization: Bearer $TOKEN" \
+    | python -mjson.tool
 
-{"result": [
-{"expression_record": [{"cycle_time": "29.41", "absolute_concentration_stdev": "1.37e-05", "ratio_to_invariants_stdev": "0.00015", "cycle_time_stdev": "0.33", "material_text_description": "Young Siliques", "ratio_to_invariants": "0.0048", "absolute_concentration": "1.80e-05"}], "transcript": "AT1G33930.1", "class": "transcript_property", "source_text_description": "RT-PCR"}
-],
-"metadata": {"time_in_main": 0.5123190879821777},
-"status": "success"}
+{
+    "metadata": {
+        "time_in_main": 0.378154993057251
+    },
+    "result": [
+        {
+            "class": "transcript_property",
+            "expression_record": [
+                {
+                    "absolute_concentration": "1.80e-05",
+                    "absolute_concentration_stdev": "1.37e-05",
+                    "cycle_time": "29.41",
+                    "cycle_time_stdev": "0.33",
+                    "material_text_description": "Young Siliques",
+                    "ratio_to_invariants": "0.0048",
+                    "ratio_to_invariants_stdev": "0.00015"
+                }
+            ],
+            "source_text_description": "RT-PCR",
+            "transcript": "AT1G33930.1"
+        }
+    ],
+    "status": "success"
+}
 ```
