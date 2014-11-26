@@ -84,17 +84,15 @@ def search(args):
                 'transcript': trans,
                 'class': 'transcript_property',
                 'source_text_description': 'RT-PCR',
-                'expression_record': [
-                    {
-                        'material_text_description': valid_materials[result['elem_tissue'].lower()],
-                        'cycle_time': result['elem_cycle_time'],
-                        'cycle_time_stdev': result['elem_cycle_time2'],
-                        'absolute_concentration': result['elem_conc'],
-                        'absolute_concentration_stdev': result['elem_conc2'],
-                        'ratio_to_invariants': result['elem_ratio'],
-                        'ratio_to_invariants_stdev': result['elem_ratio2']
-                    }
-                ]
+                'expression_record': {
+                    'material_text_description': valid_materials[result['elem_tissue'].lower()],
+                    'cycle_time': result['elem_cycle_time'],
+                    'cycle_time_stdev': result['elem_cycle_time2'],
+                    'absolute_concentration': result['elem_conc'],
+                    'absolute_concentration_stdev': result['elem_conc2'],
+                    'ratio_to_invariants': result['elem_ratio'],
+                    'ratio_to_invariants_stdev': result['elem_ratio2']
+                }
             }
         print json.dumps(record, indent=2)
         print '---'

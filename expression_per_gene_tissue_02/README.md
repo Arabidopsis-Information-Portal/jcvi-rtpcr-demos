@@ -24,17 +24,15 @@ curl -sk -L -X GET "$API/$NS/expression_per_gene_tissue_02_v0.2/search?transcrip
     "result": [
         {
             "class": "transcript_property",
-            "expression_record": [
-                {
-                    "absolute_concentration": "1.80e-05",
-                    "absolute_concentration_stdev": "1.37e-05",
-                    "cycle_time": "29.41",
-                    "cycle_time_stdev": "0.33",
-                    "material_text_description": "Young Siliques",
-                    "ratio_to_invariants": "0.0048",
-                    "ratio_to_invariants_stdev": "0.00015"
-                }
-            ],
+            "expression_record": {
+                "absolute_concentration": "1.80e-05",
+                "absolute_concentration_stdev": "1.37e-05",
+                "cycle_time": "29.41",
+                "cycle_time_stdev": "0.33",
+                "material_text_description": "Young Siliques",
+                "ratio_to_invariants": "0.0048",
+                "ratio_to_invariants_stdev": "0.00015"
+            },
             "source_text_description": "RT-PCR",
             "transcript": "AT1G33930.1"
         }
