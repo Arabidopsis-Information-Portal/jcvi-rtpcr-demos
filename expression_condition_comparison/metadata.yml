@@ -1,0 +1,9 @@
+---
+name: expression_condition_comparison
+version: 0.1
+description: JCVI RT-PCR Webservice returns AIP schema using server-supplied JSON
+type: query
+main_module: expression_condition_comparison/main.py
+requirements:
+    - requests
+url: http://www.jcvi.org/cgi-bin/arabidopsis/qpcr/ExpressionConditionComparison
