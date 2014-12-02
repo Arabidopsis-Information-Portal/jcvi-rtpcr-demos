@@ -90,16 +90,14 @@ def search(args):
                 'transcript': transcript,
                 'class': 'transcript_property',
                 'source_text_description': 'RT-PCR',
-                'expression_comparison_record': [
-                    {
+                'expression_comparison_record': {
                         'material1_text_description': result['elem_tissue1'],
                         'expression_value_material1': result['elem_tissue1_value'],
                         'expression_value_material1_stdev': result['elem_tissue1_value2'],
                         'material2_text_description': result['elem_tissue2'],
                         'expression_value_material2': result['elem_tissue2_value'],
                         'expression_value_material2_stdev': result['elem_tissue2_value2']
-                    }
-                ]
+                }
             }
         print json.dumps(record, indent=2)
         print '---'
